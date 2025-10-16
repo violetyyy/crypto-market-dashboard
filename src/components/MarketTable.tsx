@@ -192,7 +192,7 @@ export default function MarketTable({ onSelectSymbol }: MarketTableProps) {
         {isLoading ? (
           <div className="space-y-2">
             {Array.from({ length: 10 }).map((_, idx) => (
-              <Skeleton key={idx} className="h-7 w-full" />
+              <Skeleton key={idx} className="h-12 sm:h-14 w-full" />
             ))}
           </div>
         ) : (
