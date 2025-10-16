@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { useBinanceData } from "@/hooks/useBinanceData";
+import { useBinanceData } from "@/hooks";
 import { Card } from "@/components/ui/card";
 import { formatNumber } from "@/utils/formatters";
 
-export default function GlobalStats() {
+export const GlobalStats = () => {
   const { data } = useBinanceData();
 
   const { totalQuoteVolume, btcQuoteVolume, btcDominance } = useMemo(() => {
@@ -52,4 +52,4 @@ export default function GlobalStats() {
       </Card>
     </div>
   );
-}
+};

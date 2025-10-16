@@ -1,11 +1,13 @@
 "use client";
 
-import TopMovers from "@/components/TopMovers";
-import { MarketTable } from "@/components/table/marketTable/MarketTable";
 import React from "react";
-import { CoinDetailModal } from "@/components/table/CoinDetailModal";
-import CurrencySwitcher from "@/components/headers/CurrencySwitcher";
-import GlobalStats from "@/components/headers/GlobalStats";
+import {
+  TopMovers,
+  MarketTable,
+  CoinDetailModal,
+  CurrencySwitcher,
+  GlobalStats,
+} from "@/components";
 
 function useSymbolSelection() {
   const [symbol, setSymbol] = React.useState<string | null>(null);

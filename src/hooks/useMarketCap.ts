@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { CoinGeckoService } from "@/services";
+import { CACHE_CONFIG } from "@/config";
 
 type MarketCapData = Record<string, number>;
 
@@ -49,22 +50,13 @@ export function useMarketCap(symbols: string[]) {
       }
 
       try {
-        const { data } = await axios.get(
-          "https://api.coingecko.com/api/v3/simple/price",
-          {
-            params: {
-              ids: coinIds.join(","),
-              vs_currencies: "usd",
-              include_market_cap: true,
-            },
-          }
-        );
+        const data = await CoinGeckoService.getMarketCaps(coinIds);
 
         const result: MarketCapData = {};
         symbols.forEach((symbol) => {
           const coinId = SYMBOL_TO_COINGECKO_ID[symbol];
-          if (coinId && data[coinId]?.usd_market_cap) {
-            result[symbol] = data[coinId].usd_market_cap;
+          if (coinId && data[coinId]?.usd) {
+            result[symbol] = data[coinId].usd;
           }
         });
 
@@ -74,8 +66,8 @@ export function useMarketCap(symbols: string[]) {
         return {};
       }
     },
-    refetchInterval: 300_000, // Refetch every 5 minutes
-    staleTime: 120_000, // Consider data stale after 2 minutes
+    refetchInterval: CACHE_CONFIG.MARKET_CAP_REFRESH_INTERVAL,
+    staleTime: CACHE_CONFIG.STALE_TIME,
     enabled: symbols.length > 0,
   });
 

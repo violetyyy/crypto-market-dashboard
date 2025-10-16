@@ -1,9 +1,9 @@
-export { MarketTable } from "./marketTable/MarketTable";
-export { MarketTableBody } from "./marketTable/MarketTableBody";
-export { MarketTableFilters } from "./marketTable/MarketTableFilters";
-export { MarketTableHeader } from "./marketTable/MarketTableHeader";
-export { MarketTableRow } from "./marketTable/MarketTableRow";
-export { MarketTableSkeleton } from "./marketTable/MarketTableSkeleton";
+export { MarketTable } from "./market-table/MarketTable";
+export { MarketTableBody } from "./market-table/MarketTableBody";
+export { MarketTableFilters } from "./market-table/MarketTableFilters";
+export { MarketTableHeader } from "./market-table/MarketTableHeader";
+export { MarketTableRow } from "./market-table/MarketTableRow";
+export { MarketTableSkeleton } from "./market-table/MarketTableSkeleton";
 export { Pagination } from "./Pagination";
 export { SearchBox } from "./SearchBox";
 export { CoinDetailModal } from "./CoinDetailModal";

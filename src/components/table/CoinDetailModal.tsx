@@ -17,7 +17,8 @@ import {
   Tooltip,
 } from "recharts";
 import { formatNumber, formatPrice } from "@/utils/formatters";
-import axios from "axios";
+import { BinanceService } from "@/services";
+import { CHART_CONFIG } from "@/config";
 
 type CoinDetailModalProps = {
   symbol: string | null;
@@ -56,9 +57,7 @@ export const CoinDetailModal = ({
       setLoading(true);
       setError(null);
       try {
-        const { data } = await axios.get<Kline[]>(
-          `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=15m&limit=96`
-        );
+        const data = await BinanceService.getKlines(symbol, "15m", 96);
         if (!cancelled) setKlines(data);
       } catch {
         if (!cancelled) setError("Failed to load chart");

@@ -5,7 +5,7 @@ import type { BinanceTicker24hr } from "@/types/binance";
 import { formatNumber, formatPercent, formatPrice } from "@/utils/formatters";
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { SymbolSparkline } from "../../sparkline";
+import { SymbolSparkline } from "@/components/Sparklines";
 
 type MarketTableRowProps = {
   data: BinanceTicker24hr;

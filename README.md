@@ -1,8 +1,8 @@
-Crypto Market Dashboard
+#Crypto Market Dashboard
 
 A modern, responsive cryptocurrency market dashboard built with Next.js 15, TypeScript, and Tailwind CSS. The dashboard provides real-time market data from Binance API, allowing users to track live prices, top gainers and losers, and global market statistics.
 
-#### Features
+# FEATURES
 
 # Market Overview
 
@@ -62,11 +62,9 @@ Full TypeScript support for type safety
 
 npm or yarn
 
-# Installation
-
 Clone the repository and install dependencies. Run the development server and open the dashboard in a browser.
 
-#### Tech Stack
+# Tech Stack
 
 Next.js 15 with App Router
 
@@ -86,7 +84,7 @@ Lucide React for icons
 
 Framer Motion for animations
 
-#### Data Sources
+# Data Sources
 
 Binance REST API (/api/v3/ticker/24hr) filtered to USDT pairs
 
@@ -96,7 +94,7 @@ CoinGecko API for market cap and currency conversion data
 
 Binance Klines API for historical price data used in charts
 
-#### Highlights
+# Highlights
 
 Fully responsive and desktop-first design
 
@@ -110,7 +108,7 @@ Clean, modern interface with smooth animations
 
 Full TypeScript support for safer, maintainable code
 
-#### Notes
+# Notes
 
 EUR/MNT conversion rates are placeholder values
 
@@ -119,3 +117,7 @@ CoinGecko API has rate limits for free usage
 WebSocket updates are throttled for smooth UI
 
 Market cap refreshes every five minutes, price data every sixty seconds
+
+# DEPLOYMENT LINK
+
+https://crypto-market-dashboard-indol.vercel.app/

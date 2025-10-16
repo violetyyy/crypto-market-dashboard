@@ -8,8 +8,9 @@ import React, {
   useCallback,
   useState,
 } from "react";
+import { CURRENCY_CONFIG } from "@/config";
 
-type Currency = "USD" | "EUR" | "MNT";
+type Currency = (typeof CURRENCY_CONFIG.SUPPORTED_CURRENCIES)[number];
 
 type CurrencyContextValue = {
   currency: Currency;
@@ -24,12 +25,14 @@ const CurrencyContext = createContext<CurrencyContextValue | undefined>(
 
 const DEFAULT_RATES: Record<Currency, number> = {
   USD: 1,
-  EUR: 0.92,
-  MNT: 3450,
+  EUR: CURRENCY_CONFIG.PLACEHOLDER_RATES.EUR,
+  MNT: CURRENCY_CONFIG.PLACEHOLDER_RATES.MNT,
 };
 
 export function CurrencyProvider({ children }: { children: React.ReactNode }) {
-  const [currency, setCurrencyState] = useState<Currency>("USD");
+  const [currency, setCurrencyState] = useState<Currency>(
+    CURRENCY_CONFIG.DEFAULT_CURRENCY
+  );
   const [rates] = useState(DEFAULT_RATES);
 
   useEffect(() => {
@@ -37,8 +40,11 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
       typeof window !== "undefined"
         ? window.localStorage.getItem("currency")
         : null;
-    if (saved === "USD" || saved === "EUR" || saved === "MNT") {
-      setCurrencyState(saved);
+    if (
+      saved &&
+      CURRENCY_CONFIG.SUPPORTED_CURRENCIES.includes(saved as Currency)
+    ) {
+      setCurrencyState(saved as Currency);
     }
   }, []);
 

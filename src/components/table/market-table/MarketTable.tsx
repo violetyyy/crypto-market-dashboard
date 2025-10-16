@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useMemo, useState, useCallback } from "react";
-import { useBinanceData } from "@/hooks/useBinanceData";
-import { useWebSocket } from "@/hooks/useWebSocket";
-import { useMarketCap } from "@/hooks/useMarketCap";
+import {
+  useBinanceData,
+  useWebSocket,
+  useMarketCap,
+  useFavorites,
+} from "@/hooks";
+import { useCurrency } from "@/context";
 import type { BinanceTicker24hr } from "@/types/binance";
-import { useCurrency } from "@/context/CurrencyContext";
-import { useFavorites } from "@/hooks/useFavorites";
 import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
 import { Table } from "../../ui/table";
 import { MarketTableHeader } from "./MarketTableHeader";

@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { useTopMovers } from "@/hooks/useTopMovers";
+import { useTopMovers } from "@/hooks";
+import { useCurrency } from "@/context";
 import { formatPercent, formatPrice } from "@/utils/formatters";
-import { useCurrency } from "@/context/CurrencyContext";
 import type { BinanceTicker24hr } from "@/types/binance";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {
   Table,
   TableBody,
@@ -13,15 +13,15 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "./ui/table";
-import Skeleton from "./ui/skeleton";
-import { SymbolSparkline } from "@/components/sparkline";
+} from "../ui/table";
+import Skeleton from "../ui/skeleton";
+import { SymbolSparkline } from "@/components/Sparklines";
 
 type TopMoversProps = {
   onSelectSymbol?: (symbol: string) => void;
 };
 
-export default function TopMovers({ onSelectSymbol }: TopMoversProps) {
+export const TopMovers = ({ onSelectSymbol }: TopMoversProps) => {
   const { data, isLoading } = useTopMovers();
   const { currency, convertFromUSD } = useCurrency();
 
@@ -143,4 +143,4 @@ export default function TopMovers({ onSelectSymbol }: TopMoversProps) {
       </Card>
     </div>
   );
-}
+};

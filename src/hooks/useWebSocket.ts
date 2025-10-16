@@ -1,4 +1,6 @@
 import { useEffect, useRef } from "react";
+import { BinanceService } from "@/services";
+import { WS_CONFIG } from "@/config";
 
 type TickerMessage = {
   s: string; // symbol
@@ -14,13 +16,13 @@ type UseWebSocketProps = {
 
 export function useWebSocket({
   onTickerUpdate,
-  throttleMs = 250,
+  throttleMs = WS_CONFIG.THROTTLE_MS,
 }: UseWebSocketProps) {
   const wsRef = useRef<WebSocket | null>(null);
   const lastEmitRef = useRef<number>(0);
 
   useEffect(() => {
-    const ws = new WebSocket("wss://stream.binance.com:9443/ws/!ticker@arr");
+    const ws = new WebSocket(BinanceService.getWebSocketUrl());
     wsRef.current = ws;
 
     ws.onmessage = (event) => {

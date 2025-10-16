@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useCurrency } from "@/context/CurrencyContext";
+import { useCurrency } from "@/context";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 
-export default function CurrencySwitcher() {
+export const CurrencySwitcher = () => {
   const { currency, setCurrency } = useCurrency();
   return (
     <DropdownMenu>
@@ -34,4 +34,4 @@ export default function CurrencySwitcher() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
