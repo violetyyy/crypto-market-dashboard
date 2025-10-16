@@ -28,16 +28,25 @@ export function useWebSocket({
       if (now - lastEmitRef.current < throttleMs) return;
       lastEmitRef.current = now;
       try {
-        const arr = JSON.parse(event.data) as any[];
+        const arr = JSON.parse(event.data) as unknown[];
         if (Array.isArray(arr)) {
           for (const item of arr) {
-            const msg: TickerMessage = {
-              s: item.s,
-              c: item.c,
-              P: item.P,
-              v: item.v,
-            };
-            onTickerUpdate?.(msg);
+            if (
+              typeof item === "object" &&
+              item !== null &&
+              "s" in item &&
+              "c" in item &&
+              "P" in item &&
+              "v" in item
+            ) {
+              const msg: TickerMessage = {
+                s: (item as { s: string }).s,
+                c: (item as { c: string }).c,
+                P: (item as { P: string }).P,
+                v: (item as { v: string }).v,
+              };
+              onTickerUpdate?.(msg);
+            }
           }
         }
       } catch {

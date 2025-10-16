@@ -3,7 +3,6 @@ import axios from "axios";
 
 type MarketCapData = Record<string, number>;
 
-// Mapping from Binance symbols to CoinGecko IDs
 const SYMBOL_TO_COINGECKO_ID: Record<string, string> = {
   BTCUSDT: "bitcoin",
   ETHUSDT: "ethereum",
@@ -41,7 +40,6 @@ export function useMarketCap(symbols: string[]) {
   const { data: marketCapData = {} } = useQuery<MarketCapData>({
     queryKey: ["coingecko", "marketcap", symbols.sort().join(",")],
     queryFn: async () => {
-      // Get CoinGecko IDs for the symbols
       const coinIds = symbols
         .map((symbol) => SYMBOL_TO_COINGECKO_ID[symbol])
         .filter(Boolean);
@@ -51,9 +49,6 @@ export function useMarketCap(symbols: string[]) {
       }
 
       try {
-        // Fetch market cap data from CoinGecko
-        // Using the /simple/price endpoint with market_cap parameter
-        // Note: CoinGecko free tier allows up to ~250 coins per request
         const { data } = await axios.get(
           "https://api.coingecko.com/api/v3/simple/price",
           {
@@ -65,7 +60,6 @@ export function useMarketCap(symbols: string[]) {
           }
         );
 
-        // Map CoinGecko response back to Binance symbols
         const result: MarketCapData = {};
         symbols.forEach((symbol) => {
           const coinId = SYMBOL_TO_COINGECKO_ID[symbol];

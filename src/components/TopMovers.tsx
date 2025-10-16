@@ -4,6 +4,7 @@ import React from "react";
 import { useTopMovers } from "@/hooks/useTopMovers";
 import { formatPercent, formatPrice } from "@/utils/formatters";
 import { useCurrency } from "@/context/CurrencyContext";
+import type { BinanceTicker24hr } from "@/types/binance";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import {
   Table,
@@ -14,7 +15,7 @@ import {
   TableRow,
 } from "./ui/table";
 import Skeleton from "./ui/skeleton";
-import SymbolSparkline from "@/components/SymbolSparkline";
+import { SymbolSparkline } from "@/components/sparkline";
 
 type TopMoversProps = {
   onSelectSymbol?: (symbol: string) => void;
@@ -24,7 +25,7 @@ export default function TopMovers({ onSelectSymbol }: TopMoversProps) {
   const { data, isLoading } = useTopMovers();
   const { currency, convertFromUSD } = useCurrency();
 
-  const renderRows = (items: any[] | undefined) => {
+  const renderRows = (items: BinanceTicker24hr[] | undefined) => {
     if (!items) return null;
     return items.map((i) => {
       const percent = parseFloat(i.priceChangePercent);

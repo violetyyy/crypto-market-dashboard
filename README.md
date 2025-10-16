@@ -1,48 +1,121 @@
-## Crypto Market Dashboard
+Crypto Market Dashboard
 
-Modern, responsive crypto dashboard built with Next.js (TypeScript), Tailwind CSS, shadcn-style UI primitives, React Query, axios, native WebSocket, and Recharts.
+A modern, responsive cryptocurrency market dashboard built with Next.js 15, TypeScript, and Tailwind CSS. The dashboard provides real-time market data from Binance API, allowing users to track live prices, top gainers and losers, and global market statistics.
 
-### Features
+#### Features
 
-- Real-time market overview table (USDT pairs)
-- Live price updates via Binance WebSocket
-- Sorting, search, pagination
-- Coin Detail modal with 24h line chart (Recharts)
-- Top Gainers & Top Losers section
-- Favorites (localStorage)
-- Currency switcher (USD/EUR/MNT)
-- Global stats (total 24h volume, BTC dominance)
-- Mini sparklines per symbol
-- Loading skeletons and subtle animations
+# Market Overview
 
-### Getting Started
+Displays real-time cryptocurrency prices for USDT pairs
 
-1. Install deps:
+Live updates via Binance WebSocket
 
-```bash
-npm install
-```
+Sortable columns including Symbol, Price, 24h Change, Volume, and Market Cap
 
-2. Run dev server:
+Advanced search and filtering
 
-```bash
-npm run dev
-```
+Pagination for better navigation
 
-3. Open http://localhost:3000
+Favorites system stored in localStorage
 
-### Data Sources
+# Charts and Analytics
 
-- REST: `https://api.binance.com/api/v3/ticker/24hr` (filtered to USDT)
-- WS: `wss://stream.binance.com:9443/ws/!ticker@arr`
+Coin detail modal with 24-hour price charts
 
-### Structure
+Mini sparkline charts for quick trend visualization
 
-- `src/app/` — pages and providers
-- `src/components/` — UI components
-- `src/hooks/` — data hooks (`useBinanceData`, `useTopMovers`, `useWebSocket`, `useSparkline`, `useFavorites`)
-- `src/context/` — `CurrencyContext`
-- `src/utils/` — formatters
-- `src/types/` — Binance types
+Sections for top gainers and top losers
 
-Note: EUR/MNT rates are placeholders; swap with a real FX source if needed.
+Global market statistics, including total 24-hour volume and BTC dominance
+
+# Multi-Currency Support
+
+Switch between USD, EUR, and MNT
+
+Real-time conversion rates
+
+Market cap data sourced from CoinGecko API
+
+# Responsive Design
+
+Mobile-first design optimized for all screen sizes
+
+Horizontal scrolling for tables on smaller screens
+
+Touch-friendly interface
+
+Adaptive typography and layouts
+
+# Performance and User Experience
+
+React Query for caching and background updates
+
+Loading skeletons and smooth animations
+
+Error handling and fallback UI
+
+WebSocket throttling for optimal performance
+
+Full TypeScript support for type safety
+
+#### Getting Started
+
+npm or yarn
+
+# Installation
+
+Clone the repository and install dependencies. Run the development server and open the dashboard in a browser.
+
+#### Tech Stack
+
+Next.js 15 with App Router
+
+TypeScript
+
+Tailwind CSS and shadcn/ui
+
+React Query for data fetching and caching
+
+Axios for HTTP requests
+
+Recharts for charts
+
+Native WebSocket API for live updates
+
+Lucide React for icons
+
+Framer Motion for animations
+
+#### Data Sources
+
+Binance REST API (/api/v3/ticker/24hr) filtered to USDT pairs
+
+Binance WebSocket API for live price updates
+
+CoinGecko API for market cap and currency conversion data
+
+Binance Klines API for historical price data used in charts
+
+#### Highlights
+
+Fully responsive and desktop-first design
+
+Real-time updates without page refresh
+
+Smart pagination with ellipsis for easier navigation
+
+Optimized performance with React Query caching and WebSocket throttling
+
+Clean, modern interface with smooth animations
+
+Full TypeScript support for safer, maintainable code
+
+#### Notes
+
+EUR/MNT conversion rates are placeholder values
+
+CoinGecko API has rate limits for free usage
+
+WebSocket updates are throttled for smooth UI
+
+Market cap refreshes every five minutes, price data every sixty seconds
