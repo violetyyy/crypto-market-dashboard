@@ -59,6 +59,35 @@
     height: 3rem;
     min-height: 3rem;
   }
+
+  /* Responsive table improvements */
+  @media (max-width: 640px) {
+    .table-header-spaced {
+      padding: 0.75rem 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .table-cell-spaced {
+      padding: 0.75rem 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .table-row-spaced {
+      height: 3rem;
+      min-height: 3rem;
+    }
+  }
+
+  /* Tablet improvements */
+  @media (min-width: 641px) and (max-width: 1023px) {
+    .table-header-spaced {
+      padding: 0.875rem 0.625rem;
+    }
+
+    .table-cell-spaced {
+      padding: 0.875rem 0.625rem;
+    }
+  }
 }
 
 @keyframes fade-in {

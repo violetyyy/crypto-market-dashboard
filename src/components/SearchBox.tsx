@@ -15,12 +15,12 @@ export default function SearchBox({
   placeholder = "Search symbol...",
 }: SearchBoxProps) {
   return (
-    <div className="w-[400px]">
+    <div className="w-full max-w-sm">
       <Input
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="max-w-sm"
+        className="w-full"
       />
     </div>
   );

@@ -21,7 +21,7 @@ export default function CurrencySwitcher() {
           <ChevronDown className="ml-2 h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setCurrency("USD")}>
           USD
         </DropdownMenuItem>

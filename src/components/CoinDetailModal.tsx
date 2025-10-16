@@ -78,7 +78,7 @@ export default function CoinDetailModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl w-full">
+      <DialogContent className="max-w-sm sm:max-w-md md:max-w-lg lg:max-w-4xl xl:max-w-5xl w-full max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
             {symbol ? symbol.replace("USDT", "/USDT") : ""}
@@ -101,7 +101,18 @@ export default function CoinDetailModal({
                     width={56}
                     tickFormatter={(v) => formatNumber(Number(v), 4)}
                   />
-                  <XAxis dataKey="time" tick={false} />
+                  <XAxis
+                    dataKey="time"
+                    tick={{ fontSize: 12 }}
+                    tickFormatter={(value) => {
+                      const date = new Date(value);
+                      return date.toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                      });
+                    }}
+                  />
                   <Tooltip
                     formatter={(v: any) => formatPrice(Number(v), "USD")}
                     labelFormatter={() => ""}
@@ -119,7 +130,7 @@ export default function CoinDetailModal({
           )}
           {/* Simple stats */}
           {!loading && !error && klines.length > 0 && (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               <Stat
                 label="24h High"
                 value={formatPrice(
