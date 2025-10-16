@@ -6,4 +6,4 @@ export { MarketTableRow } from "./market-table/MarketTableRow";
 export { MarketTableSkeleton } from "./market-table/MarketTableSkeleton";
 export { Pagination } from "./Pagination";
 export { SearchBox } from "./SearchBox";
-export { CoinDetailModal } from "./CoinDetailModal";
+export { CoinDetailModal } from "./CoinDetailModalNew";
