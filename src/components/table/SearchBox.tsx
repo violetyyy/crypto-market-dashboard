@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Input } from "@/components/ui/input";
+import { Input } from "../ui/input";
 
 type SearchBoxProps = {
   value: string;
@@ -9,11 +9,11 @@ type SearchBoxProps = {
   placeholder?: string;
 };
 
-export default function SearchBox({
+export const SearchBox = ({
   value,
   onChange,
   placeholder = "Search symbol...",
-}: SearchBoxProps) {
+}: SearchBoxProps) => {
   return (
     <div className="w-full max-w-sm">
       <Input
@@ -24,4 +24,4 @@ export default function SearchBox({
       />
     </div>
   );
-}
+};

@@ -8,7 +8,6 @@ type ProvidersProps = {
   children: React.ReactNode;
 };
 
-// Create a single QueryClient instance for the app
 const queryClient = new QueryClient();
 
 export function Providers({ children }: ProvidersProps) {

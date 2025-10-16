@@ -10,13 +10,13 @@ type SparklineProps = {
   strokeWidth?: number;
 };
 
-export default function Sparkline({
+export const Sparkline = ({
   data,
   color = "#22c55e",
   height = 32,
   width = 120,
   strokeWidth = 2,
-}: SparklineProps) {
+}: SparklineProps) => {
   const points = useMemo(() => {
     if (!data || data.length === 0) return "";
     const min = Math.min(...data);
@@ -47,4 +47,4 @@ export default function Sparkline({
       />
     </svg>
   );
-}
+};

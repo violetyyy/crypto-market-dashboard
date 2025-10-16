@@ -5,6 +5,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useCallback,
   useState,
 } from "react";
 
@@ -48,11 +49,14 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   };
 
-  const convertFromUSD = (amountInUSD: number) => amountInUSD * rates[currency];
+  const convertFromUSD = useCallback(
+    (amountInUSD: number) => amountInUSD * rates[currency],
+    [currency, rates]
+  );
 
   const value = useMemo<CurrencyContextValue>(
     () => ({ currency, setCurrency, convertFromUSD, rates }),
-    [currency, rates]
+    [currency, rates, convertFromUSD]
   );
 
   return (

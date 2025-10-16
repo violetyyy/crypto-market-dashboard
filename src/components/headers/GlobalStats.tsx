@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import { useBinanceData } from "@/hooks/useBinanceData";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { formatNumber } from "@/utils/formatters";
 
 export default function GlobalStats() {

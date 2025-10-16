@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Sparkline from "@/components/Sparkline";
+import { Sparkline } from "./Sparkline";
 import { useSparkline } from "@/hooks/useSparkline";
 
 type Props = {
@@ -12,16 +12,16 @@ type Props = {
   height?: number;
 };
 
-export default function SymbolSparkline({
+export const SymbolSparkline = ({
   symbol,
   isUp = true,
   colorUp = "#22c55e",
   colorDown = "#ef4444",
   height = 28,
-}: Props) {
+}: Props) => {
   const { data } = useSparkline(symbol);
   if (!data) return null;
   return (
     <Sparkline data={data} color={isUp ? colorUp : colorDown} height={height} />
   );
-}
+};

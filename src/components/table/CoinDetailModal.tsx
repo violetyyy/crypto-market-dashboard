@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import Skeleton from "./ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   LineChart,
   Line,
@@ -40,11 +40,11 @@ type Kline = [
   string
 ];
 
-export default function CoinDetailModal({
+export const CoinDetailModal = ({
   symbol,
   open,
   onOpenChange,
-}: CoinDetailModalProps) {
+}: CoinDetailModalProps) => {
   const [loading, setLoading] = useState(false);
   const [klines, setKlines] = useState<Kline[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -60,7 +60,7 @@ export default function CoinDetailModal({
           `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=15m&limit=96`
         );
         if (!cancelled) setKlines(data);
-      } catch (e) {
+      } catch {
         if (!cancelled) setError("Failed to load chart");
       } finally {
         if (!cancelled) setLoading(false);
@@ -114,7 +114,7 @@ export default function CoinDetailModal({
                     }}
                   />
                   <Tooltip
-                    formatter={(v: any) => formatPrice(Number(v), "USD")}
+                    formatter={(v: number) => formatPrice(Number(v), "USD")}
                     labelFormatter={() => ""}
                   />
                   <Line
@@ -158,7 +158,7 @@ export default function CoinDetailModal({
       </DialogContent>
     </Dialog>
   );
-}
+};
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
