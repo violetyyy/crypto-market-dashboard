@@ -120,4 +120,4 @@ Market cap refreshes every five minutes, price data every sixty seconds
 
 # DEPLOYMENT LINK
 
-https://crypto-market-dashboard-indol.vercel.app/
+https://crypto-market-dashboard-seven.vercel.app/
