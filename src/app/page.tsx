@@ -20,10 +20,14 @@ function useSymbolSelection() {
 export default function Home() {
   const { symbol, open, setOpen, onSelect } = useSymbolSelection();
   return (
-    <main className="container mx-auto px-4 py-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <GlobalStats />
-        <CurrencySwitcher />
+    <main className="container mx-auto px-2 sm:px-4 py-3 sm:py-6 space-y-3 sm:space-y-6">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex-1">
+          <GlobalStats />
+        </div>
+        <div className="flex justify-end">
+          <CurrencySwitcher />
+        </div>
       </div>
       <TopMovers onSelectSymbol={onSelect} />
       <MarketTable onSelectSymbol={onSelect} />

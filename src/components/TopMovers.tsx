@@ -36,18 +36,18 @@ export default function TopMovers({ onSelectSymbol }: TopMoversProps) {
           className="cursor-pointer transition-colors hover:bg-accent/50 animate-fade-in table-row-spaced"
           onClick={() => onSelectSymbol?.(i.symbol)}
         >
-          <TableCell className="font-medium stable-table-cell table-cell-spaced">
+          <TableCell className="font-medium stable-table-cell table-cell-spaced text-xs sm:text-sm">
             {i.symbol.replace("USDT", "/USDT")}
           </TableCell>
-          <TableCell className="stable-table-cell table-cell-spaced">
+          <TableCell className="stable-table-cell table-cell-spaced text-xs sm:text-sm">
             <span className={isPositive ? "text-green-500" : "text-red-500"}>
               {formatPercent(percent)}
             </span>
           </TableCell>
-          <TableCell className="text-right stable-table-cell table-cell-spaced">
+          <TableCell className="text-right stable-table-cell table-cell-spaced text-xs sm:text-sm">
             {formatPrice(lastPrice, currency)}
           </TableCell>
-          <TableCell className="stable-table-cell text-center table-cell-spaced">
+          <TableCell className="stable-table-cell text-center table-cell-spaced hidden sm:table-cell">
             <div className="flex justify-center">
               <SymbolSparkline
                 symbol={i.symbol}
@@ -81,25 +81,27 @@ export default function TopMovers({ onSelectSymbol }: TopMoversProps) {
           {isLoading ? (
             <LoadingTable />
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="stable-header table-header-spaced">
-                    Symbol
-                  </TableHead>
-                  <TableHead className="stable-header table-header-spaced">
-                    %
-                  </TableHead>
-                  <TableHead className="text-right stable-header table-header-spaced">
-                    Price
-                  </TableHead>
-                  <TableHead className="stable-header text-center table-header-spaced">
-                    Spark
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>{renderRows(data?.gainers)}</TableBody>
-            </Table>
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="stable-header table-header-spaced">
+                      Symbol
+                    </TableHead>
+                    <TableHead className="stable-header table-header-spaced">
+                      %
+                    </TableHead>
+                    <TableHead className="text-right stable-header table-header-spaced">
+                      Price
+                    </TableHead>
+                    <TableHead className="stable-header text-center table-header-spaced hidden sm:table-cell">
+                      Spark
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>{renderRows(data?.gainers)}</TableBody>
+              </Table>
+            </div>
           )}
         </CardContent>
       </Card>
@@ -114,25 +116,27 @@ export default function TopMovers({ onSelectSymbol }: TopMoversProps) {
           {isLoading ? (
             <LoadingTable />
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="stable-header table-header-spaced">
-                    Symbol
-                  </TableHead>
-                  <TableHead className="stable-header table-header-spaced">
-                    %
-                  </TableHead>
-                  <TableHead className="text-right stable-header table-header-spaced">
-                    Price
-                  </TableHead>
-                  <TableHead className="stable-header text-center table-header-spaced">
-                    Spark
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>{renderRows(data?.losers)}</TableBody>
-            </Table>
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="stable-header table-header-spaced">
+                      Symbol
+                    </TableHead>
+                    <TableHead className="stable-header table-header-spaced">
+                      %
+                    </TableHead>
+                    <TableHead className="text-right stable-header table-header-spaced">
+                      Price
+                    </TableHead>
+                    <TableHead className="stable-header text-center table-header-spaced hidden sm:table-cell">
+                      Spark
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>{renderRows(data?.losers)}</TableBody>
+              </Table>
+            </div>
           )}
         </CardContent>
       </Card>

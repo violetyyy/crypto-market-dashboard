@@ -158,27 +158,23 @@ export default function MarketTable({ onSelectSymbol }: MarketTableProps) {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="flex w-full justify-between sm:flex-row sm:items-center">
-            <SearchBox value={query} onChange={setQuery} />
-            <Button
-              variant={showFavoritesOnly ? "default" : "outline"}
-              onClick={() => {
-                setShowFavoritesOnly(!showFavoritesOnly);
-                setPage(1);
-                if (!showFavoritesOnly) {
-                  setQuery("");
-                }
-              }}
-              className="flex items-center gap-2"
-              disabled={favorites.length === 0 && !showFavoritesOnly}
-            >
-              ⭐{" "}
-              {showFavoritesOnly
-                ? "Show All"
-                : `Favorites (${favorites.length})`}
-            </Button>
-          </div>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <SearchBox value={query} onChange={setQuery} />
+          <Button
+            variant={showFavoritesOnly ? "default" : "outline"}
+            onClick={() => {
+              setShowFavoritesOnly(!showFavoritesOnly);
+              setPage(1);
+              if (!showFavoritesOnly) {
+                setQuery("");
+              }
+            }}
+            className="flex items-center gap-2 w-full sm:w-auto"
+            disabled={favorites.length === 0 && !showFavoritesOnly}
+          >
+            ⭐{" "}
+            {showFavoritesOnly ? "Show All" : `Favorites (${favorites.length})`}
+          </Button>
         </div>
 
         {showFavoritesOnly && (
@@ -200,127 +196,131 @@ export default function MarketTable({ onSelectSymbol }: MarketTableProps) {
             ))}
           </div>
         ) : (
-          <Table>
-            <TableHeader>
-              <TableRow className="hover:bg-transparent">
-                <TableHead
-                  className="cursor-pointer table-header-clickable stable-header table-header-spaced"
-                  onClick={() => onSort("symbol")}
-                >
-                  <div className="flex items-center gap-1">
-                    Symbol
-                    <SortIndicator
-                      currentSortKey={sortKey}
-                      sortKey="symbol"
-                      sortOrder={sortOrder}
-                    />
-                  </div>
-                </TableHead>
-                <TableHead
-                  className="cursor-pointer table-header-clickable stable-header table-header-spaced"
-                  onClick={() => onSort("lastPrice")}
-                >
-                  <div className="flex items-center gap-1">
-                    Price ({currency})
-                    <SortIndicator
-                      currentSortKey={sortKey}
-                      sortKey="lastPrice"
-                      sortOrder={sortOrder}
-                    />
-                  </div>
-                </TableHead>
-                <TableHead
-                  className="cursor-pointer table-header-clickable stable-header table-header-spaced"
-                  onClick={() => onSort("priceChangePercent")}
-                >
-                  <div className="flex items-center gap-1">
-                    24h Change
-                    <SortIndicator
-                      currentSortKey={sortKey}
-                      sortKey="priceChangePercent"
-                      sortOrder={sortOrder}
-                    />
-                  </div>
-                </TableHead>
-                <TableHead
-                  className="cursor-pointer table-header-clickable stable-header table-header-spaced"
-                  onClick={() => onSort("volume")}
-                >
-                  <div className="flex items-center gap-1">
-                    24h Volume
-                    <SortIndicator
-                      currentSortKey={sortKey}
-                      sortKey="volume"
-                      sortOrder={sortOrder}
-                    />
-                  </div>
-                </TableHead>
-                <TableHead className="stable-header text-center table-header-spaced">
-                  Market Cap
-                </TableHead>
-                <TableHead className="stable-header text-center table-header-spaced">
-                  Sparkline
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {pageItems.map((r) => {
-                const priceUSD = parseFloat(r.lastPrice);
-                const price = convertFromUSD(priceUSD);
-                const change = parseFloat(r.priceChangePercent);
-                const volume = parseFloat(r.quoteVolume || r.volume);
-                const isUp = change >= 0;
-                const marketCap = marketCapData[r.symbol];
-                const marketCapDisplay = marketCap
-                  ? formatPrice(convertFromUSD(marketCap), currency)
-                  : "—";
-                return (
-                  <TableRow
-                    key={r.symbol}
-                    className="cursor-pointer transition-colors hover:bg-accent/50 animate-fade-in table-row-spaced"
-                    onClick={() => onSelectSymbol?.(r.symbol)}
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow className="hover:bg-transparent">
+                  <TableHead
+                    className="cursor-pointer table-header-clickable stable-header table-header-spaced"
+                    onClick={() => onSort("symbol")}
                   >
-                    <TableCell className="font-medium flex items-center gap-2 stable-table-cell table-cell-spaced">
-                      <Button
-                        variant={isFavorite(r.symbol) ? "default" : "outline"}
-                        size="icon"
-                        className="h-6 w-6"
-                        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                          e.stopPropagation();
-                          toggleFavorite(r.symbol);
-                        }}
-                        aria-label="toggle favorite"
-                      >
-                        ★
-                      </Button>
-                      {r.symbol.replace("USDT", "/USDT")}
-                    </TableCell>
-                    <TableCell className="stable-table-cell table-cell-spaced">
-                      {formatPrice(price, currency)}
-                    </TableCell>
-                    <TableCell
-                      className={`stable-table-cell table-cell-spaced ${
-                        isUp ? "text-green-500" : "text-red-500"
-                      }`}
+                    <div className="flex items-center gap-1">
+                      Symbol
+                      <SortIndicator
+                        currentSortKey={sortKey}
+                        sortKey="symbol"
+                        sortOrder={sortOrder}
+                      />
+                    </div>
+                  </TableHead>
+                  <TableHead
+                    className="cursor-pointer table-header-clickable stable-header table-header-spaced"
+                    onClick={() => onSort("lastPrice")}
+                  >
+                    <div className="flex items-center gap-1">
+                      Price ({currency})
+                      <SortIndicator
+                        currentSortKey={sortKey}
+                        sortKey="lastPrice"
+                        sortOrder={sortOrder}
+                      />
+                    </div>
+                  </TableHead>
+                  <TableHead
+                    className="cursor-pointer table-header-clickable stable-header table-header-spaced"
+                    onClick={() => onSort("priceChangePercent")}
+                  >
+                    <div className="flex items-center gap-1">
+                      24h Change
+                      <SortIndicator
+                        currentSortKey={sortKey}
+                        sortKey="priceChangePercent"
+                        sortOrder={sortOrder}
+                      />
+                    </div>
+                  </TableHead>
+                  <TableHead
+                    className="cursor-pointer table-header-clickable stable-header table-header-spaced hidden md:table-cell"
+                    onClick={() => onSort("volume")}
+                  >
+                    <div className="flex items-center gap-1">
+                      24h Volume
+                      <SortIndicator
+                        currentSortKey={sortKey}
+                        sortKey="volume"
+                        sortOrder={sortOrder}
+                      />
+                    </div>
+                  </TableHead>
+                  <TableHead className="stable-header text-center table-header-spaced hidden lg:table-cell">
+                    Market Cap
+                  </TableHead>
+                  <TableHead className="stable-header text-center table-header-spaced hidden sm:table-cell">
+                    Sparkline
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {pageItems.map((r) => {
+                  const priceUSD = parseFloat(r.lastPrice);
+                  const price = convertFromUSD(priceUSD);
+                  const change = parseFloat(r.priceChangePercent);
+                  const volume = parseFloat(r.quoteVolume || r.volume);
+                  const isUp = change >= 0;
+                  const marketCap = marketCapData[r.symbol];
+                  const marketCapDisplay = marketCap
+                    ? formatPrice(convertFromUSD(marketCap), currency)
+                    : "—";
+                  return (
+                    <TableRow
+                      key={r.symbol}
+                      className="cursor-pointer transition-colors hover:bg-accent/50 animate-fade-in table-row-spaced"
+                      onClick={() => onSelectSymbol?.(r.symbol)}
                     >
-                      {formatPercent(change)}
-                    </TableCell>
-                    <TableCell className="stable-table-cell table-cell-spaced">
-                      {formatNumber(volume, 0)}
-                    </TableCell>
-                    <TableCell className="stable-table-cell text-center table-cell-spaced">
-                      {marketCapDisplay}
-                    </TableCell>
-                    <TableCell className="stable-table-cell text-center table-cell-spaced">
-                      <div className="flex justify-center">
-                        <SymbolSparkline symbol={r.symbol} isUp={isUp} />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+                      <TableCell className="font-medium flex items-center gap-1 sm:gap-2 stable-table-cell table-cell-spaced min-w-[120px]">
+                        <Button
+                          variant={isFavorite(r.symbol) ? "default" : "outline"}
+                          size="icon"
+                          className="h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0"
+                          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                            e.stopPropagation();
+                            toggleFavorite(r.symbol);
+                          }}
+                          aria-label="toggle favorite"
+                        >
+                          ★
+                        </Button>
+                        <span className="text-xs sm:text-sm truncate">
+                          {r.symbol.replace("USDT", "/USDT")}
+                        </span>
+                      </TableCell>
+                      <TableCell className="stable-table-cell table-cell-spaced text-xs sm:text-sm">
+                        {formatPrice(price, currency)}
+                      </TableCell>
+                      <TableCell
+                        className={`stable-table-cell table-cell-spaced text-xs sm:text-sm ${
+                          isUp ? "text-green-500" : "text-red-500"
+                        }`}
+                      >
+                        {formatPercent(change)}
+                      </TableCell>
+                      <TableCell className="stable-table-cell table-cell-spaced hidden md:table-cell">
+                        {formatNumber(volume, 0)}
+                      </TableCell>
+                      <TableCell className="stable-table-cell text-center table-cell-spaced hidden lg:table-cell">
+                        {marketCapDisplay}
+                      </TableCell>
+                      <TableCell className="stable-table-cell text-center table-cell-spaced hidden sm:table-cell">
+                        <div className="flex justify-center">
+                          <SymbolSparkline symbol={r.symbol} isUp={isUp} />
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </div>
         )}
 
         <Pagination

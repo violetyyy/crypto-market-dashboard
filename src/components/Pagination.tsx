@@ -21,11 +21,11 @@ export default function Pagination({
   const canNext = page < totalPages;
 
   return (
-    <div className="flex items-center justify-between gap-4">
-      <div className="text-sm text-muted-foreground">
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="text-sm text-muted-foreground text-center sm:text-left">
         Page {page} of {totalPages}
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 justify-center sm:justify-end">
         <Button
           variant="outline"
           size="sm"

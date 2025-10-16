@@ -19,31 +19,33 @@ export default function GlobalStats() {
   }, [data]);
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <Card>
-        <div className="flex flex-col justify-center items-center h-full w-full px-6 py-4">
-          <div className="text-xs text-muted-foreground">
+        <div className="flex flex-col justify-center items-center h-full w-full px-3 py-3 sm:px-4 sm:py-4">
+          <div className="text-xs text-muted-foreground text-center">
             Total 24h Volume (USDT)
           </div>
-          <div className="text-lg font-semibold">
+          <div className="text-sm sm:text-base lg:text-lg font-semibold text-center">
             {formatNumber(totalQuoteVolume, 0)}
           </div>
         </div>
       </Card>
       <Card>
-        <div className="flex flex-col justify-center items-center h-full w-full">
-          <div className="text-xs text-muted-foreground">
+        <div className="flex flex-col justify-center items-center h-full w-full px-3 py-3 sm:px-4 sm:py-4">
+          <div className="text-xs text-muted-foreground text-center">
             BTC 24h Volume (USDT)
           </div>
-          <div className="text-lg font-semibold">
+          <div className="text-sm sm:text-base lg:text-lg font-semibold text-center">
             {formatNumber(btcQuoteVolume, 0)}
           </div>
         </div>
       </Card>
-      <Card>
-        <div className="flex flex-col justify-center items-center h-full w-full">
-          <div className="text-xs text-muted-foreground">BTC Dominance</div>
-          <div className="text-lg font-semibold">
+      <Card className="sm:col-span-2 lg:col-span-1">
+        <div className="flex flex-col justify-center items-center h-full w-full px-3 py-3 sm:px-4 sm:py-4">
+          <div className="text-xs text-muted-foreground text-center">
+            BTC Dominance
+          </div>
+          <div className="text-sm sm:text-base lg:text-lg font-semibold text-center">
             {btcDominance.toFixed(2)}%
           </div>
         </div>
